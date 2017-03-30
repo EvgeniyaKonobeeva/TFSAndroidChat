@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <!--dialog activity-->
+    <color name="message_icon">#9b9b9b</color>
+    <color name="author">#494949</color>
+    <color name="chat_name">#6d3893</color>
 </resources>

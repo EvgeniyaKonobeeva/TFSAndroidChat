@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DEBUG</string>
     <string name="about_app">О приложении</string>
     <string name="dialogs">Диалоги</string>
     <string name="exit">Выход</string>
