@@ -1,5 +1,7 @@
 package com.example.evgenia.tfsandroidchat.dialog;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.example.evgenia.tfsandroidchat.R;
 import com.example.evgenia.tfsandroidchat.dialog.models.DialogModel;
 import com.example.evgenia.tfsandroidchat.dialog.models.MessageModel;
+import com.example.evgenia.tfsandroidchat.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +28,7 @@ import tinkoff.androidcourse.MainActivity;
  */
 
 public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerViewClickListener{
+    private String userLogin;
 
     private RecyclerView recyclerView;
     @Nullable
@@ -36,17 +40,23 @@ public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerVie
     }
 
     public void initRecyclerView(View view){
+        userLogin = getActivity().getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
+
         recyclerView = (RecyclerView)view.findViewById(R.id.rv_dialog);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         layoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(layoutManager);
-        DialogsAdapter adapter = new DialogsAdapter(generateDialog(), this);
+        DialogsAdapter adapter = new DialogsAdapter(generateDialog(), this, userLogin);
         recyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), layoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount()-1);
     }
 
+    /**
+     * генерируем диалоги
+     * диалог состоит из истории сообщений
+     * каждое 4е сообщение - пользователя, остальные - сообщения его собеседников*/
     public ArrayList<DialogModel> generateDialog(){
         ArrayList<DialogModel> list = new ArrayList<>();
         for(int i = 0; i < 20; i++){
@@ -59,12 +69,14 @@ public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerVie
         return list;
     }
 
+
+    /** генерируем список сообщений*/
     public ArrayList<MessageModel> generateMessages(int k){
         ArrayList<MessageModel> list = new ArrayList<>();
         int countMsg = 1;
         for(int i = 0; i < countMsg; i++){
             long time = Calendar.getInstance().getTimeInMillis();
-            list.add(new MessageModel((k==1? "author ": "login"), time, "text " + time));
+            list.add(new MessageModel((k==1? "author ": "evg"), time, "text " + time));
         }
         return list;
     }

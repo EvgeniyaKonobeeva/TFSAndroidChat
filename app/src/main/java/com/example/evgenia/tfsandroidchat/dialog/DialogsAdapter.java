@@ -27,9 +27,12 @@ public class DialogsAdapter extends RecyclerView.Adapter {
     private ArrayList<DialogModel> list;
     private OnRecyclerViewClickListener clickListener;
 
-    public DialogsAdapter(ArrayList list, OnRecyclerViewClickListener clickListener) {
+    private String userLogin;
+
+    public DialogsAdapter(ArrayList list, OnRecyclerViewClickListener clickListener, String userLogin) {
         this.list = list;
         this.clickListener = clickListener;
+        this.userLogin = userLogin;
     }
 
     @Override
@@ -54,8 +57,11 @@ public class DialogsAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
+        /**
+         * если имя автора последнего сообщения совпадает с именем залогиневшегося юзера, то это будет одна разметка - правая
+         * иначе - левая для собеседников*/
         int lastPos = list.get(position).getMessagesList().size()-1;
-        if(list.get(position).getMessagesList().get(lastPos).getAuthorLogin().equals("login")){
+        if(list.get(position).getMessagesList().get(lastPos).getAuthorLogin().equals(userLogin)){
             return MY_MSG;
         }else return SMB_MSG;
     }
@@ -78,8 +84,8 @@ public class DialogsAdapter extends RecyclerView.Adapter {
         protected void onBind(DialogModel model) {
             super.onBind(model);
             tvMessage.setText(model.getMessagesList().get(model.getMessagesList().size()-1).getText());
-            tvAuthor.setText("login");
-            tvDatetime.setText(new SimpleDateFormat("dd.MM.yy hh:ms")
+            tvAuthor.setText(userLogin);
+            tvDatetime.setText(new SimpleDateFormat("dd.MM.yy hh:mm")
                     .format(model.getMessagesList().get(model.getMessagesList().size()-1).getDate()));
 
         }
@@ -103,7 +109,7 @@ public class DialogsAdapter extends RecyclerView.Adapter {
             super.onBind(model);
             tvMessage.setText(model.getMessagesList().get(model.getMessagesList().size()-1).getText());
             tvAuthor.setText(model.getMessagesList().get(model.getMessagesList().size()-1).getAuthorLogin());
-            tvDatetime.setText(new SimpleDateFormat("dd.MM.yy hh:ms")
+            tvDatetime.setText(new SimpleDateFormat("dd.MM.yy hh:mm")
                     .format(model.getMessagesList().get(model.getMessagesList().size()-1).getDate()));
 
         }

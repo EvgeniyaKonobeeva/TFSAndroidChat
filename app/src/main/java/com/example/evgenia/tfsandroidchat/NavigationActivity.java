@@ -1,5 +1,6 @@
 package com.example.evgenia.tfsandroidchat;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -18,13 +19,17 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.evgenia.tfsandroidchat.aboutApp.AboutAppFrg;
 import com.example.evgenia.tfsandroidchat.dialog.DialogsFrg;
+import com.example.evgenia.tfsandroidchat.login.LoginActivity;
 import com.squareup.picasso.Picasso;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    private static final String TAG = "MainActivity";
+public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    private static final String TAG = "NavigationActivity";
+    private static final int MENU_DIALOGS = 0;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
@@ -35,20 +40,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         toggle = new ActionBarDrawerToggle(this, drawerLayout, 0, 0);
         toggle.setDrawerIndicatorEnabled(true);
+
         drawerLayout.addDrawerListener(toggle);
 
         navigationView = (NavigationView) findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // пишем имя пользоваотеля
+        String userLogin = getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
+        ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_user_login)).setText(userLogin);
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (savedInstanceState == null) {
+            navigationView.getMenu().getItem(MENU_DIALOGS).setChecked(true);
+            onNavigationItemSelected(navigationView.getMenu().getItem(MENU_DIALOGS));
+        }
+
+
     }
 
     @Override
@@ -97,9 +113,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()){
             case R.id.item_dialog :
                 addFragment(new DialogsFrg());
+                getSupportActionBar().setTitle(R.string.dialogs);
                 Toast.makeText(getApplicationContext(), "dialog", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.item_about_pp:
+                addFragment(new AboutAppFrg());
+                getSupportActionBar().setTitle(R.string.about_app);
                 Toast.makeText(getApplicationContext(), "about", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.item_exit :

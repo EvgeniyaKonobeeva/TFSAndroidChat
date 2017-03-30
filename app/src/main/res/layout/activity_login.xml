@@ -16,13 +16,18 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:ellipsize="end"
-        tools:text="test_login" />
+        tools:text="test_login"
+        android:lines="1"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"/>
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
