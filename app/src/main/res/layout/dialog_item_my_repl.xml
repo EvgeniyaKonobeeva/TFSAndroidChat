@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <!--заголовок чата-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!--дата/время последнего сообщения-->
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                tools:text="date_time"
+                android:textSize="16sp" />
+            <!--имя собеседника/название чата-->
+            <TextView
+                android:id="@+id/tv_chat_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/chat_name"
+                android:textSize="25sp"
+                tools:text="user_login"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_alignParentRight="true"/>
+
+
+        </RelativeLayout>
+
+
+        <!--сообщения-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--мое сообщение-->
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:maxLines="1"
+                android:textColor="@color/message_icon"
+                tools:text="message"
+                android:layout_alignParentRight="true"/>
+
+            <!--прочитано-->
+            <ImageView
+                android:id="@+id/imv_read"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:src="@mipmap/ic_launcher"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--аватар-->
+    <ImageView
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
+        tools:background="#e3c4fc"
+        android:layout_marginLeft="5dp" />
+
+</LinearLayout>
