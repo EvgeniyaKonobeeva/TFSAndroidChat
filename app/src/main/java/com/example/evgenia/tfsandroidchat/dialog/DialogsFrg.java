@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,22 +30,102 @@ import tinkoff.androidcourse.MainActivity;
  */
 
 public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerViewClickListener{
+    private static final String TAG = "DialogsFrg";
     private String userLogin;
-
     private RecyclerView recyclerView;
+    public static String TITLE_KEY = "title";
+
+
+    public static DialogsFrg newInstance(String title){
+        Bundle bundle = new Bundle();
+        bundle.putString(TITLE_KEY, title);
+        DialogsFrg frg = new DialogsFrg();
+        frg.setArguments(bundle);
+        return frg;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Log.d(TAG, "onAttach: ");
+        super.onAttach(context);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.fragment_dialog, container, false);
         initRecyclerView(view);
+        setTitle();
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        Log.d(TAG, "onStart: ");
+        super.onStart();
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onViewStateRestored: ");
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        Log.d(TAG, "onResume: ");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.d(TAG, "onPause: ");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG, "onStop: ");
+        super.onStop();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        Log.d(TAG, "onSaveInstanceState: ");
+//        outState.putString(TITLE_KEY, getArguments().getString(TITLE_KEY));
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy: ");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        Log.d(TAG, "onDetach: ");
+        super.onDetach();
+    }
+
+    public void setTitle(){
+        if(getArguments() != null && getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getArguments().getString(TITLE_KEY));
+        }
     }
 
     public void initRecyclerView(View view){
         userLogin = getActivity().getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.rv_dialog);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(layoutManager);
         DialogsAdapter adapter = new DialogsAdapter(generateDialog(), this, userLogin);
@@ -83,7 +165,9 @@ public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerVie
 
     @Override
     public void onRecyclerViewClick(int pos) {
-        Toast.makeText(getActivity().getApplicationContext(), "position = " + pos, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "position = " + pos, Toast.LENGTH_SHORT).show();
     }
+
+
 }
 

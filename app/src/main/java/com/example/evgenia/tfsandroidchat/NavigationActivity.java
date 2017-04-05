@@ -112,17 +112,15 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.item_dialog :
-                addFragment(new DialogsFrg());
-                getSupportActionBar().setTitle(R.string.dialogs);
-                Toast.makeText(getApplicationContext(), "dialog", Toast.LENGTH_SHORT).show();
+                addFragment(DialogsFrg.newInstance(getString(R.string.dialogs)));
+                Toast.makeText(this, "dialog", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.item_about_pp:
-                addFragment(new AboutAppFrg());
-                getSupportActionBar().setTitle(R.string.about_app);
-                Toast.makeText(getApplicationContext(), "about", Toast.LENGTH_SHORT).show();
+                addFragment(AboutAppFrg.newInstance(getString(R.string.about_app)));
+                Toast.makeText(this, "about", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.item_exit :
-                Toast.makeText(getApplicationContext(), "exit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "exit", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
@@ -133,6 +131,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onBackPressed() {
+        Log.d(TAG, "onBackPressed: ");
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {

@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(editTextLogin.getText().length() > 0 && editTextPassword.getText().length() > 0){
                     startActivity(editTextLogin.getText().toString());
                 }else {
-                    Toast.makeText(getApplicationContext(), "неверный пароль или логин", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "неверный пароль или логин", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -47,12 +47,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void startActivity(String login){
-        Intent intent =new Intent(getApplicationContext(), NavigationActivity.class);
+        Intent intent =new Intent(this, NavigationActivity.class);
 
         Bundle bundle = new Bundle();
         bundle.putString(KEY_LOGIN, login);
 
         intent.putExtras(bundle);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 
         startActivity(intent);
     }
