@@ -1,10 +1,10 @@
-package com.example.evgenia.tfsandroidchat.dialog;
+package com.example.evgenia.tfsandroidchat.dialogs_list;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,15 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.evgenia.tfsandroidchat.OnNavigationActionBar;
 import com.example.evgenia.tfsandroidchat.R;
-import com.example.evgenia.tfsandroidchat.dialog.models.DialogModel;
-import com.example.evgenia.tfsandroidchat.dialog.models.MessageModel;
+import com.example.evgenia.tfsandroidchat.dialog_alone.DialogAloneFrg;
+import com.example.evgenia.tfsandroidchat.dialogs_list.models.DialogModel;
+import com.example.evgenia.tfsandroidchat.dialogs_list.models.MessageModel;
 import com.example.evgenia.tfsandroidchat.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import tinkoff.androidcourse.MainActivity;
 
 /**
  * Created by Evgenia on 30.03.2017.
@@ -116,8 +116,14 @@ public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerVie
     }
 
     public void setTitle(){
-        if(getArguments() != null && getActivity() instanceof AppCompatActivity) {
+        if(getArguments() != null &&
+                getActivity() instanceof AppCompatActivity &&
+                ((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
+
+
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getArguments().getString(TITLE_KEY));
+
+
         }
     }
 
@@ -166,6 +172,20 @@ public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerVie
     @Override
     public void onRecyclerViewClick(int pos) {
         Toast.makeText(getActivity(), "position = " + pos, Toast.LENGTH_SHORT).show();
+        addFragment(new DialogAloneFrg(), true);
+    }
+
+    public void addFragment(Fragment fragment, boolean addToBackstack) {
+        if(getActivity() instanceof OnNavigationActionBar){
+            ((OnNavigationActionBar) getActivity()).addFragment(fragment, addToBackstack);
+        }else {
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction = fragmentTransaction.replace(R.id.fragment_container, fragment);
+            if (addToBackstack) {
+                fragmentTransaction.addToBackStack(null);
+            }
+            fragmentTransaction.commit();
+        }
     }
 
 

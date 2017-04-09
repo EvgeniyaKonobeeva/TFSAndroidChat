@@ -1,18 +1,14 @@
 package com.example.evgenia.tfsandroidchat;
 
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,11 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.evgenia.tfsandroidchat.aboutApp.AboutAppFrg;
-import com.example.evgenia.tfsandroidchat.dialog.DialogsFrg;
+import com.example.evgenia.tfsandroidchat.dialogs_list.DialogsFrg;
 import com.example.evgenia.tfsandroidchat.login.LoginActivity;
-import com.squareup.picasso.Picasso;
 
-public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnNavigationActionBar{
     private static final String TAG = "NavigationActivity";
     private static final int MENU_DIALOGS = 0;
     private DrawerLayout drawerLayout;
@@ -112,11 +107,11 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.item_dialog :
-                addFragment(DialogsFrg.newInstance(getString(R.string.dialogs)));
+                addFragment(DialogsFrg.newInstance(getString(R.string.dialogs)), false);
                 Toast.makeText(this, "dialog", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.item_about_pp:
-                addFragment(AboutAppFrg.newInstance(getString(R.string.about_app)));
+                addFragment(AboutAppFrg.newInstance(getString(R.string.about_app)), false);
                 Toast.makeText(this, "about", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.item_exit :
@@ -132,9 +127,13 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     @Override
     public void onBackPressed() {
         Log.d(TAG, "onBackPressed: ");
+        Log.d(TAG, "onBackPressed: getSupportFragmentManager().getBackStackEntryCount()= " + getSupportFragmentManager().getBackStackEntryCount());
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
+        } else if ((getSupportFragmentManager().getBackStackEntryCount()) == 1){
+            setDrawerToggleEnabled(true);
+            super.onBackPressed();
+        }else {
             super.onBackPressed();
         }
     }
@@ -148,19 +147,28 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected: before");
-        if(toggle.onOptionsItemSelected(item)){
-            Log.d(TAG, "onOptionsItemSelected: ");
-            //действие
-            return true;
+        if(!toggle.onOptionsItemSelected(item)){
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void addFragment(Fragment fragment) {
+
+    /* =========== методы для управления навигацией фрагментов на активити==================*/
+
+    @Override
+    public void addFragment(Fragment fragment, boolean addToBackStack) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction = fragmentTransaction.replace(R.id.fragment_container, fragment);
+        if(addToBackStack){
+            fragmentTransaction.addToBackStack(null);
+            setDrawerToggleEnabled(false);
+        }
         fragmentTransaction.commit();
     }
 
-
+    @Override
+    public void setDrawerToggleEnabled(boolean enabled) {
+        toggle.setDrawerIndicatorEnabled(enabled);
+    }
 }

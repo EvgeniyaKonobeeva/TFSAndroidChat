@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="message_sending">
+        <attr name="btn_background" format="color|reference"/>
+        <attr name="view_background" format="color|reference"/>
+        <attr name="btn_width" format="dimension"/>
+        <attr name="btn_height" format="dimension"/>
+        <attr name="inner_tv_padding_left" format="dimension"/>
+        <attr name="inner_tv_padding_right" format="dimension"/>
+        <attr name="inner_tv_padding_top" format="dimension"/>
+        <attr name="inner_tv_padding_bottom" format="dimension"/>
+        <attr name="inner_tv_padding" format="dimension"/>
+        <attr name="inner_tv_margin_left" format="dimension"/>
+        <attr name="inner_tv_margin_right" format="dimension"/>
+        <attr name="inner_tv_margin_top" format="dimension"/>
+        <attr name="inner_tv_margin_bottom" format="dimension"/>
+        <attr name="inner_tv_margin" format="dimension"/>
+    </declare-styleable>
+</resources>

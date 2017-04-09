@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.dialog.models;
+package com.example.evgenia.tfsandroidchat.dialogs_list.models;
 
 
 /**

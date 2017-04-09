@@ -11,9 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.evgenia.tfsandroidchat.R;
-import com.example.evgenia.tfsandroidchat.dialog.DialogsFrg;
 
-import static com.example.evgenia.tfsandroidchat.dialog.DialogsFrg.TITLE_KEY;
+import static com.example.evgenia.tfsandroidchat.dialogs_list.DialogsFrg.TITLE_KEY;
 
 /**
  * Created by Evgenia on 30.03.2017.

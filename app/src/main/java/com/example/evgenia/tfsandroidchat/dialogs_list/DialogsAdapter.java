@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.dialog;
+package com.example.evgenia.tfsandroidchat.dialogs_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.evgenia.tfsandroidchat.R;
-import com.example.evgenia.tfsandroidchat.dialog.models.DialogModel;
+import com.example.evgenia.tfsandroidchat.dialogs_list.models.DialogModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
