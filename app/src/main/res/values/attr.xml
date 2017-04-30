@@ -1,19 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="message_sending">
+
+<!--EditText attrs-->
+        <!---->
+
+        <attr name="et_background" format="color|reference"/>
+
+        <!--editText padding-->
+        <attr name="et_padding_left" format="dimension"/>
+        <attr name="et_padding_right" format="dimension"/>
+        <attr name="et_padding_top" format="dimension"/>
+        <attr name="et_padding_bottom" format="dimension"/>
+        <attr name="et_padding" format="dimension"/>
+
+        <!--editText margin-->
+        <attr name="et_margin_left" format="dimension"/>
+        <attr name="et_margin_right" format="dimension"/>
+        <attr name="et_margin_top" format="dimension"/>
+        <attr name="et_margin_bottom" format="dimension"/>
+        <attr name="et_margin" format="dimension" />
+
+        <attr name="text" format="string|reference"/>
+        <attr name="hint" format="string|reference"/>
+
+
+<!--Button attrs-->
+        <!---->
+
         <attr name="btn_background" format="color|reference"/>
-        <attr name="view_background" format="color|reference"/>
+
+        <!--width & heights-->
         <attr name="btn_width" format="dimension"/>
         <attr name="btn_height" format="dimension"/>
-        <attr name="inner_tv_padding_left" format="dimension"/>
-        <attr name="inner_tv_padding_right" format="dimension"/>
-        <attr name="inner_tv_padding_top" format="dimension"/>
-        <attr name="inner_tv_padding_bottom" format="dimension"/>
-        <attr name="inner_tv_padding" format="dimension"/>
-        <attr name="inner_tv_margin_left" format="dimension"/>
-        <attr name="inner_tv_margin_right" format="dimension"/>
-        <attr name="inner_tv_margin_top" format="dimension"/>
-        <attr name="inner_tv_margin_bottom" format="dimension"/>
-        <attr name="inner_tv_margin" format="dimension"/>
+
+        <!--button padding-->
+        <attr name="btn_padding_left" format="dimension"/>
+        <attr name="btn_padding_right" format="dimension"/>
+        <attr name="btn_padding_top" format="dimension"/>
+        <attr name="btn_padding_bottom" format="dimension"/>
+        <attr name="btn_padding" format="dimension"/>
+
+        <!--button margin-->
+        <attr name="btn_margin_left" format="dimension"/>
+        <attr name="btn_margin_right" format="dimension"/>
+        <attr name="btn_margin_top" format="dimension"/>
+        <attr name="btn_margin_bottom" format="dimension"/>
+        <attr name="btn_margin" format="dimension" />
+
+
+
+
+
     </declare-styleable>
 </resources>

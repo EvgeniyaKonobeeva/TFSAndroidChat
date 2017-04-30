@@ -48,8 +48,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         navigationView.setNavigationItemSelectedListener(this);
 
         // пишем имя пользоваотеля
-        String userLogin = getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
-        ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_user_login)).setText(userLogin);
+//        String userLogin = getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
+//        ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_user_login)).setText(userLogin);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

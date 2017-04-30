@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DEBUG</string>
+    <string name="app_name">TFSChat</string>
     <string name="about_app">О приложении</string>
     <string name="dialogs">Диалоги</string>
     <string name="exit">Выход</string>
     <string name="about_app_text">средство обмена сообщениями по компьютерной сети в режиме реального времени, а также программное обеспечение, позволяющее организовывать такое общение.</string>
+    <string name="enter_msg">Введите сообщение</string>
 </resources>

@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/tv_text"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.evgenia.tfsandroidchat.ui.custom.MessageSendingView
+        android:id="@+id/msg_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="окно диалога"/>
-
+        android:layout_gravity="bottom"
+        android:padding="16dp"
+        custom:btn_background="@drawable/selector_send_button"
+        custom:btn_height="30dp"
+        custom:btn_width="30dp"
+        custom:et_background="@color/background_transparent"
+        custom:text="Hello honey!"
+        custom:hint="@string/enter_msg"/>
 </LinearLayout>

@@ -128,7 +128,7 @@ public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerVie
     }
 
     public void initRecyclerView(View view){
-        userLogin = getActivity().getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
+//        userLogin = getActivity().getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.rv_dialog);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

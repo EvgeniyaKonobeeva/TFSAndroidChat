@@ -9,4 +9,7 @@
     <color name="message_icon">#9b9b9b</color>
     <color name="author">#494949</color>
     <color name="chat_name">#6d3893</color>
+
+
+    <color name="background_transparent">#00000000</color>
 </resources>
