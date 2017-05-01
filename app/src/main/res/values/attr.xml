@@ -53,4 +53,13 @@
 
 
     </declare-styleable>
+
+
+    <declare-styleable name="count_messages">
+            <attr name="text_size" format="dimension|reference"/>
+            <attr name="padding" format="dimension|reference"/>
+            <attr name="circle_color" format="color|reference"/>
+            <attr name="text_color" format="color|reference"/>
+
+    </declare-styleable>
 </resources>

@@ -17,4 +17,13 @@
         custom:et_background="@color/background_transparent"
         custom:text="Hello honey!"
         custom:hint="@string/enter_msg"/>
+
+    <com.example.evgenia.tfsandroidchat.ui.custom.CountMessagesView
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        custom:text_size="16dp"
+        custom:circle_color="@color/color_pink"
+        custom:text_color="@color/white"/>
 </LinearLayout>
