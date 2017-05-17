@@ -31,9 +31,12 @@ import java.util.Calendar;
 
 public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerViewClickListener{
     private static final String TAG = "DialogsFrg";
+    public static String TITLE_KEY = "title";
+
+
     private String userLogin;
     private RecyclerView recyclerView;
-    public static String TITLE_KEY = "title";
+
 
 
     public static DialogsFrg newInstance(String title){
@@ -128,7 +131,7 @@ public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerVie
     }
 
     public void initRecyclerView(View view){
-//        userLogin = getActivity().getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
+        userLogin = getActivity().getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.rv_dialog);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

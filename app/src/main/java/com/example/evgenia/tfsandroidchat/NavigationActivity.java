@@ -22,6 +22,10 @@ import com.example.evgenia.tfsandroidchat.aboutApp.AboutAppFrg;
 import com.example.evgenia.tfsandroidchat.dialogs_list.DialogsFrg;
 import com.example.evgenia.tfsandroidchat.login.LoginActivity;
 
+import java.util.List;
+
+import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
+
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnNavigationActionBar{
     private static final String TAG = "NavigationActivity";
     private static final int MENU_DIALOGS = 0;
@@ -47,9 +51,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         navigationView = (NavigationView) findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // пишем имя пользоваотеля
-//        String userLogin = getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
-//        ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_user_login)).setText(userLogin);
+        String userLogin = getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
+        ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_user_login)).setText(userLogin);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -105,6 +108,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        getSupportFragmentManager().popBackStack(null, POP_BACK_STACK_INCLUSIVE);
+        setDrawerToggleEnabled(true);
         switch (item.getItemId()){
             case R.id.item_dialog :
                 addFragment(DialogsFrg.newInstance(getString(R.string.dialogs)), false);
