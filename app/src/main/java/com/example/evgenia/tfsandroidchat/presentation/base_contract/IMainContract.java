@@ -1,7 +1,4 @@
-package com.example.evgenia.tfsandroidchat.base_contract;
-
-import android.os.Bundle;
-import android.widget.ImageView;
+package com.example.evgenia.tfsandroidchat.presentation.base_contract;
 
 /**
  * Created by User on 17.05.2017.

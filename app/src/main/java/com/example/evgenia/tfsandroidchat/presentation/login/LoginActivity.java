@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.login;
+package com.example.evgenia.tfsandroidchat.presentation.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.example.evgenia.tfsandroidchat.NavigationActivity;
+import com.example.evgenia.tfsandroidchat.presentation.NavigationActivity;
 import com.example.evgenia.tfsandroidchat.R;
-import com.example.evgenia.tfsandroidchat.base_contract.IMainContract;
-import com.example.evgenia.tfsandroidchat.base_contract.PresenterCache;
+import com.example.evgenia.tfsandroidchat.presentation.base_contract.IMainContract;
+import com.example.evgenia.tfsandroidchat.presentation.base_contract.PresenterCache;
+import com.example.evgenia.tfsandroidchat.presentation.login.user.User;
 
 
 /**
@@ -115,6 +116,7 @@ public class LoginActivity extends AppCompatActivity
 
         Bundle bundle = new Bundle();
         bundle.putString(KEY_LOGIN, login);
+
 
         intent.putExtras(bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

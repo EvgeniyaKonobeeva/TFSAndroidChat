@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.dialogs_list;
+package com.example.evgenia.tfsandroidchat.presentation.dialogs_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.evgenia.tfsandroidchat.R;
-import com.example.evgenia.tfsandroidchat.dialogs_list.models.DialogModel;
+import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.DialogModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,9 +61,7 @@ public class DialogsAdapter extends RecyclerView.Adapter {
          * если имя автора последнего сообщения совпадает с именем залогиневшегося юзера, то это будет одна разметка - правая
          * иначе - левая для собеседников*/
         int lastPos = list.get(position).getMessagesList().size()-1;
-        if(list.get(position).getMessagesList().get(lastPos).getAuthorLogin().equals(userLogin)){
-            return MY_MSG;
-        }else return SMB_MSG;
+        return SMB_MSG;
     }
 
 
@@ -108,7 +106,7 @@ public class DialogsAdapter extends RecyclerView.Adapter {
         protected void onBind(DialogModel model) {
             super.onBind(model);
             tvMessage.setText(model.getMessagesList().get(model.getMessagesList().size()-1).getText());
-            tvAuthor.setText(model.getMessagesList().get(model.getMessagesList().size()-1).getAuthorLogin());
+            tvAuthor.setText(model.getMessagesList().get(model.getMessagesList().size()-1).getAuthor());
             tvDatetime.setText(new SimpleDateFormat("dd.MM.yy hh:mm")
                     .format(model.getMessagesList().get(model.getMessagesList().size()-1).getDate()));
 

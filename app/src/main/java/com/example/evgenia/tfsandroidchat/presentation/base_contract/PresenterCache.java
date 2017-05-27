@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.base_contract;
+package com.example.evgenia.tfsandroidchat.presentation.base_contract;
 
 import java.util.HashMap;
 import java.util.Map;

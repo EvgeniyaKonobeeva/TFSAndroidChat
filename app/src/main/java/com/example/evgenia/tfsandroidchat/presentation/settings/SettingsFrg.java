@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.aboutApp;
+package com.example.evgenia.tfsandroidchat.presentation.settings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,20 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.evgenia.tfsandroidchat.R;
+import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.DialogsFrg;
 
-import static com.example.evgenia.tfsandroidchat.dialogs_list.DialogsFrg.TITLE_KEY;
+import static com.example.evgenia.tfsandroidchat.presentation.dialogs_list.DialogsFrg.TITLE_KEY;
 
 /**
  * Created by Evgenia on 30.03.2017.
  */
 
-public class AboutAppFrg extends Fragment {
-    private static final String TAG = "AboutAppFrg";
+public class SettingsFrg extends Fragment {
+    private static final String TAG = "SettingsFrg";
 
-    public static AboutAppFrg newInstance(String title){
+    public static SettingsFrg newInstance(String title){
         Bundle bundle = new Bundle();
         bundle.putString(TITLE_KEY, title);
-        AboutAppFrg frg = new AboutAppFrg();
+        SettingsFrg frg = new SettingsFrg();
         frg.setArguments(bundle);
         return frg;
     }
@@ -100,7 +101,7 @@ public class AboutAppFrg extends Fragment {
 
     public void setTitle(){
         if(getArguments() != null && getActivity() instanceof AppCompatActivity) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getArguments().getString(TITLE_KEY));
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getArguments().getString(DialogsFrg.TITLE_KEY));
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat;
+package com.example.evgenia.tfsandroidchat.presentation;
 
 import android.support.v4.app.Fragment;
 

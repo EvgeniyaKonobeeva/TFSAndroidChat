@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.ui.custom;
+package com.example.evgenia.tfsandroidchat.presentation.custom;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -107,7 +107,6 @@ public class MessageSendingView extends RelativeLayout implements TextWatcher{
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Log.d(TAG, "onMeasure: ");
 
         RelativeLayout relativeLayout = null;
 
@@ -154,5 +153,9 @@ public class MessageSendingView extends RelativeLayout implements TextWatcher{
 
     public void setOnSendingButtonClickListener(OnClickListener listener){
         button.setOnClickListener(listener);
+    }
+
+    public String getText(){
+        return editText.getText().toString();
     }
 }

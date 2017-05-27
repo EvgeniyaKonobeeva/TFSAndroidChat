@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat;
+package com.example.evgenia.tfsandroidchat.presentation;
 
 import android.content.res.Configuration;
 import android.os.PersistableBundle;
@@ -18,17 +18,17 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.evgenia.tfsandroidchat.aboutApp.AboutAppFrg;
-import com.example.evgenia.tfsandroidchat.dialogs_list.DialogsFrg;
-import com.example.evgenia.tfsandroidchat.login.LoginActivity;
-
-import java.util.List;
+import com.example.evgenia.tfsandroidchat.R;
+import com.example.evgenia.tfsandroidchat.presentation.aboutApp.AboutAppFrg;
+import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.DialogsFrg;
+import com.example.evgenia.tfsandroidchat.presentation.login.LoginActivity;
 
 import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnNavigationActionBar{
     private static final String TAG = "NavigationActivity";
     private static final int MENU_DIALOGS = 0;
+    private static final String TOGGLE_STATE = "toggle_state";
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
@@ -60,6 +60,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         if (savedInstanceState == null) {
             navigationView.getMenu().getItem(MENU_DIALOGS).setChecked(true);
             onNavigationItemSelected(navigationView.getMenu().getItem(MENU_DIALOGS));
+        }else {
+            toggle.setDrawerIndicatorEnabled(savedInstanceState.getBoolean(TOGGLE_STATE));
         }
 
 
@@ -92,8 +94,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(TOGGLE_STATE, toggle.isDrawerIndicatorEnabled());
     }
 
     @Override

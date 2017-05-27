@@ -1,6 +1,6 @@
-package com.example.evgenia.tfsandroidchat.login;
+package com.example.evgenia.tfsandroidchat.presentation.login;
 
-import com.example.evgenia.tfsandroidchat.base_contract.IMainContract;
+import com.example.evgenia.tfsandroidchat.presentation.base_contract.IMainContract;
 
 /**
  * Created by User on 17.05.2017.

@@ -12,6 +12,7 @@
 
 
     <color name="background_transparent">#00000000</color>
+    <color name="background_gray">#1b000000</color>
 
     <color name="color_circle">#c093e4</color>
     <color name="color_text">#000000</color>

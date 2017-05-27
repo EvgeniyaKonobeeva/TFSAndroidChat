@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.dialogs_list.models;
+package com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models;
 
 import java.util.ArrayList;
 

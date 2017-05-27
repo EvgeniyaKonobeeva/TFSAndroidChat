@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.dialogs_list;
+package com.example.evgenia.tfsandroidchat.presentation.dialogs_list;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,12 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.evgenia.tfsandroidchat.OnNavigationActionBar;
+import com.example.evgenia.tfsandroidchat.presentation.OnNavigationActionBar;
 import com.example.evgenia.tfsandroidchat.R;
-import com.example.evgenia.tfsandroidchat.dialog_alone.DialogAloneFrg;
-import com.example.evgenia.tfsandroidchat.dialogs_list.models.DialogModel;
-import com.example.evgenia.tfsandroidchat.dialogs_list.models.MessageModel;
-import com.example.evgenia.tfsandroidchat.login.LoginActivity;
+import com.example.evgenia.tfsandroidchat.presentation.dialog_alone.DialogAloneFrg;
+import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.DialogModel;
+import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.MessageModel;
+import com.example.evgenia.tfsandroidchat.presentation.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -166,8 +166,7 @@ public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerVie
         ArrayList<MessageModel> list = new ArrayList<>();
         int countMsg = 1;
         for(int i = 0; i < countMsg; i++){
-            long time = Calendar.getInstance().getTimeInMillis();
-            list.add(new MessageModel((k==1? "author ": "evg"), time, "text " + time));
+            list.add(new MessageModel(234, 23, "some funny text " + i, "smart author " + i, System.currentTimeMillis()));
         }
         return list;
     }
@@ -175,7 +174,7 @@ public class DialogsFrg extends Fragment implements DialogsAdapter.OnRecyclerVie
     @Override
     public void onRecyclerViewClick(int pos) {
         Toast.makeText(getActivity(), "position = " + pos, Toast.LENGTH_SHORT).show();
-        addFragment(new DialogAloneFrg(), true);
+        addFragment(DialogAloneFrg.newInstance((long)pos), true);
     }
 
     public void addFragment(Fragment fragment, boolean addToBackstack) {

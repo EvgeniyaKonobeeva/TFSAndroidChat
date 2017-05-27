@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.ui.custom;
+package com.example.evgenia.tfsandroidchat.presentation.custom;
 
 
 import android.content.Context;
