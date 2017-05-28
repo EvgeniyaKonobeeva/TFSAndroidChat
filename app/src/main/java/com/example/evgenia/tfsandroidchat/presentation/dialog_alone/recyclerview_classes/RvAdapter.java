@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.presentation.dialog_alone;
+package com.example.evgenia.tfsandroidchat.presentation.dialog_alone.recyclerview_classes;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,7 +58,7 @@ public class RvAdapter extends RecyclerView.Adapter {
     }
 
     public void addNewMessage(MessageModel msg){
-        list.add(msg);
+        list.add(0, msg);
         notifyItemInserted(0);
     }
 

@@ -29,7 +29,7 @@
                 </FrameLayout>
     </ScrollView>
 
-    <com.example.evgenia.tfsandroidchat.presentation.custom.MessageSendingView
+    <com.example.evgenia.tfsandroidchat.ui.custom.MessageSendingView
         android:id="@+id/msg_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

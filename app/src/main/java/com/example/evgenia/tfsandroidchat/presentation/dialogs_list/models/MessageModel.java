@@ -9,13 +9,16 @@ import android.os.Parcelable;
  */
 
 public class MessageModel implements Parcelable {
-    private int dialogId;
+    private long dialogId;
     private int msgId;
     private String text;
     private String author;
     private long date;
 
-    public MessageModel(int dialogId, int msgId, String text, String author, long date) {
+    public MessageModel() {
+    }
+
+    public MessageModel(long dialogId, int msgId, String text, String author, long date) {
         this.dialogId = dialogId;
         this.msgId = msgId;
         this.text = text;
@@ -23,11 +26,11 @@ public class MessageModel implements Parcelable {
         this.date = date;
     }
 
-    public int getDialogId() {
+    public long getDialogId() {
         return dialogId;
     }
 
-    public void setDialogId(int dialogId) {
+    public void setDialogId(long dialogId) {
         this.dialogId = dialogId;
     }
 
@@ -65,7 +68,7 @@ public class MessageModel implements Parcelable {
     }
 
     protected MessageModel(Parcel in) {
-            dialogId = in.readInt();
+            dialogId = in.readLong();
             msgId = in.readInt();
             text = in.readString();
             author = in.readString();
@@ -79,7 +82,7 @@ public class MessageModel implements Parcelable {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(dialogId);
+            dest.writeLong(dialogId);
             dest.writeInt(msgId);
             dest.writeString(text);
             dest.writeString(author);

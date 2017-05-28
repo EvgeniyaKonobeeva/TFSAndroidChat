@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Storage implements IStorage {
     private static final String TAG = "Storage";
     @Override
-    public ArrayList<MessageModel> getMessages(int dialogId) {
+    public ArrayList<MessageModel> getMessages(long dialogId) {
         Log.d(TAG, "getMessages: thred name = " + Thread.currentThread().getName());
         try {
             Thread.sleep(5000);
@@ -22,7 +22,8 @@ public class Storage implements IStorage {
         }
         return generateMessages(dialogId);
     }
-    private ArrayList<MessageModel> generateMessages(int did){
+
+    private ArrayList<MessageModel> generateMessages(long did){
         ArrayList<MessageModel> list = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
@@ -30,5 +31,11 @@ public class Storage implements IStorage {
         }
 
         return list;
+    }
+
+    @Override
+    public String putMessageToDB(MessageModel model) {
+        Log.d(TAG, "putMessageToDB: thread = " + Thread.currentThread().getName());
+        return "result OK";
     }
 }

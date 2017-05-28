@@ -9,5 +9,7 @@ import java.util.ArrayList;
  */
 
 public interface IStorage {
-    ArrayList<MessageModel> getMessages(int dialogId);
+    ArrayList<MessageModel> getMessages(long dialogId);
+
+    String putMessageToDB(MessageModel model);
 }

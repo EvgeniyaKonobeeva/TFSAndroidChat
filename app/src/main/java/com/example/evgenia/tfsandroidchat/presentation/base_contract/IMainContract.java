@@ -6,9 +6,9 @@ package com.example.evgenia.tfsandroidchat.presentation.base_contract;
 
 public interface IMainContract {
     interface IMainPresenter {
-        <V extends IMainView> void attach(V viewRef);
+        <V> void attach(V viewRef);
         void detach();
-        <V extends  IMainView> V getView();
+        <V> V getView();
     }
 
     interface ICachedPresenter {
@@ -17,6 +17,4 @@ public interface IMainContract {
         void restoreState();
     }
 
-    interface IMainView {
-    }
 }

@@ -8,20 +8,21 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.evgenia.tfsandroidchat.R;
 import com.example.evgenia.tfsandroidchat.presentation.NavigationActivity;
-import com.example.evgenia.tfsandroidchat.presentation.custom.MessageSendingView;
+import com.example.evgenia.tfsandroidchat.presentation.dialog_alone.loader.MassagesLoader;
+import com.example.evgenia.tfsandroidchat.presentation.dialog_alone.recyclerview_classes.RvAdapter;
 import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.MessageModel;
+import com.example.evgenia.tfsandroidchat.ui.custom.MessageSendingView;
 
 import java.util.ArrayList;
 
@@ -29,10 +30,10 @@ import java.util.ArrayList;
  * Created by User on 06.04.2017.
  */
 
-public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList>{
+public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList>, View.OnClickListener, IMessagesContract.IMessagesView {
     private static final String TAG = "DialogAloneFrg";
 
-    private static final int SOME_DIALOG_ID = 931;
+//    private static final int SOME_DIALOG_ID = 931;
     private static final int LOADER_ID = 337;
     public static final String DIALOG_ID = "dialog_id";
     public static final String KEY_LOADING = "loading";
@@ -41,6 +42,7 @@ public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCall
     private RecyclerView recyclerView;
     private MessageSendingView messageSendingView;
     private ProgressBar progressBar;
+    private IMessagesContract.IMessagesPresenter presenter;
 
     public static DialogAloneFrg newInstance(long dialogId) {
 
@@ -66,6 +68,7 @@ public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCall
         initToolBar();
 
         messageSendingView = (MessageSendingView) root.findViewById(R.id.msg_btn);
+        messageSendingView.setOnSendingButtonClickListener(this);
         progressBar = (ProgressBar) root.findViewById(R.id.progressbar);
 
         if(savedInstanceState!= null) {
@@ -83,10 +86,17 @@ public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCall
         }
 
         Bundle bundle = new Bundle();
-        bundle.putInt(DIALOG_ID, SOME_DIALOG_ID);
+        bundle.putLong(DIALOG_ID, getArguments().getLong(DIALOG_ID));
         getLoaderManager().initLoader(LOADER_ID, bundle, this);
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter = new MessagesPresenter();
+        presenter.attach(this);
     }
 
     private void initToolBar(){
@@ -147,5 +157,25 @@ public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onLoaderReset(Loader<ArrayList> loader) {
         Log.d(TAG, "onLoaderReset: ");
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        MessageModel model = new MessageModel();
+        model.setAuthor("Author1" + getArguments().getLong(DIALOG_ID));
+        model.setDate(System.currentTimeMillis());
+        model.setDialogId(getArguments().getLong(DIALOG_ID));
+        model.setText(messageSendingView.getText());
+        model.setMsgId(123);
+
+        presenter.sendMessage(model);
+        adapter.addNewMessage(model);
+    }
+
+    @Override
+    public void messageSendSuccess(String result) {
+        Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "messageSendSuccess: " + result);
     }
 }

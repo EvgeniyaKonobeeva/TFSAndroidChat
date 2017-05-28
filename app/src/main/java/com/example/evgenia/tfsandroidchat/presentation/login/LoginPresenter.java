@@ -19,7 +19,7 @@ public class LoginPresenter implements IMainContract.ICachedPresenter, ILoginCon
 
     Bundle savedBundle = new Bundle();
 
-    private WeakReference <IMainContract.IMainView> view;
+    private WeakReference <ILoginContract.ILoginView> view;
 
     public LoginPresenter() {
         Log.d(TAG, "LoginPresenter: constructor");
@@ -31,32 +31,27 @@ public class LoginPresenter implements IMainContract.ICachedPresenter, ILoginCon
         savedBundle.putString("password", password);
         Handler handler = new Handler();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(TAG, "run: do some work in thread " + Thread.currentThread().getName());
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        new Thread(() -> {
+            Log.d(TAG, "run: do some work in thread " + Thread.currentThread().getName());
 
-                Log.d(TAG, "run: done some work in thread " + Thread.currentThread().getName());
-
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(getView() != null){
-                            ((ILoginContract.ILoginView)getView()).userConfirmed(true, login, password);
-                            savedBundle.clear();
-                        }else {
-                            Log.d(TAG, "run: view detached");
-                            savedBundle.putBoolean("result", true);
-                        }
-                    }
-                });
-
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+
+            Log.d(TAG, "run: done some work in thread " + Thread.currentThread().getName());
+
+            handler.post(() -> {
+                if(getView() != null){
+                    ((ILoginContract.ILoginView)getView()).userConfirmed(true, login, password);
+                    savedBundle.clear();
+                }else {
+                    Log.d(TAG, "run: view detached");
+                    savedBundle.putBoolean("result", true);
+                }
+            });
+
         }).start();
     }
 
@@ -78,9 +73,9 @@ public class LoginPresenter implements IMainContract.ICachedPresenter, ILoginCon
 
 
     @Override
-    public <V extends IMainContract.IMainView> void attach(V viewRef) {
+    public <V> void attach(V viewRef) {
         Log.d(TAG, "attach: ");
-        view = new WeakReference<IMainContract.IMainView>(viewRef);
+        view = new WeakReference<>((ILoginContract.ILoginView) viewRef);
     }
 
     @Override
@@ -92,7 +87,7 @@ public class LoginPresenter implements IMainContract.ICachedPresenter, ILoginCon
     }
 
     @Override
-    public <V extends IMainContract.IMainView> V getView() {
+    public <V> V getView() {
         if(view != null){
             return (V)view.get();
         }else

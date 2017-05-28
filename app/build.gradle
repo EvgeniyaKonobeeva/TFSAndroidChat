@@ -65,4 +65,10 @@ dependencies {
 
     compile 'io.reactivex:rxjava:1.1.9'
     compile 'io.reactivex:rxandroid:1.2.1'
+
+    compile 'com.pushtorefresh.storio:sqlite:1.13.0'
+
+    compile 'com.pushtorefresh.storio:sqlite-annotations:1.13.0'
+
+    annotationProcessor 'com.pushtorefresh.storio:sqlite-annotations-processor:1.13.0'
 }

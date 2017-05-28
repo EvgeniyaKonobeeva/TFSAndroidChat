@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.presentation.custom;
+package com.example.evgenia.tfsandroidchat.ui.custom;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.EditText;

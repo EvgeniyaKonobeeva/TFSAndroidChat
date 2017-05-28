@@ -1,4 +1,4 @@
-package com.example.evgenia.tfsandroidchat.presentation.dialog_alone;
+package com.example.evgenia.tfsandroidchat.presentation.dialog_alone.loader;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.evgenia.tfsandroidchat.data.Data;
 import com.example.evgenia.tfsandroidchat.domain.MessageHistoryRx;
+import com.example.evgenia.tfsandroidchat.presentation.dialog_alone.DialogAloneFrg;
 import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.MessageModel;
 
 import java.util.ArrayList;
@@ -24,12 +25,12 @@ import rx.schedulers.Schedulers;
 public class MassagesLoader extends AsyncTaskLoader<ArrayList> {
     private static final String TAG = "MassagesLoader";
 
-    private int dialogId;
+    private long dialogId;
 
     public MassagesLoader(Context context, Bundle bundle) {
         super(context);
         if(!bundle.isEmpty()){
-            dialogId = bundle.getInt(DialogAloneFrg.DIALOG_ID);
+            dialogId = bundle.getLong(DialogAloneFrg.DIALOG_ID);
         }
 
     }

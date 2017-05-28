@@ -12,7 +12,7 @@ public interface ILoginContract {
         void confirmUser(String login, String password);
     }
 
-    interface ILoginView extends IMainContract.IMainView{
+    interface ILoginView{
         void userConfirmed(boolean isCorrect, String login, String password);
     }
 }
