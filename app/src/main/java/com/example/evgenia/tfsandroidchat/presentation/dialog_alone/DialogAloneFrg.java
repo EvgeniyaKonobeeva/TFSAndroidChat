@@ -17,7 +17,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.evgenia.tfsandroidchat.CurrentUser;
 import com.example.evgenia.tfsandroidchat.R;
+import com.example.evgenia.tfsandroidchat.data.storio.dao.MessageDao;
 import com.example.evgenia.tfsandroidchat.presentation.NavigationActivity;
 import com.example.evgenia.tfsandroidchat.presentation.dialog_alone.loader.MassagesLoader;
 import com.example.evgenia.tfsandroidchat.presentation.dialog_alone.recyclerview_classes.RvAdapter;
@@ -25,12 +27,13 @@ import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.Messa
 import com.example.evgenia.tfsandroidchat.ui.custom.MessageSendingView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by User on 06.04.2017.
  */
 
-public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList>, View.OnClickListener, IMessagesContract.IMessagesView {
+public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCallbacks<List>, View.OnClickListener, IMessagesContract.IMessagesView {
     private static final String TAG = "DialogAloneFrg";
 
 //    private static final int SOME_DIALOG_ID = 931;
@@ -87,7 +90,7 @@ public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCall
 
         Bundle bundle = new Bundle();
         bundle.putLong(DIALOG_ID, getArguments().getLong(DIALOG_ID));
-        getLoaderManager().initLoader(LOADER_ID, bundle, this);
+        getLoaderManager().restartLoader(LOADER_ID, bundle, this);
 
         return root;
     }
@@ -142,35 +145,37 @@ public class DialogAloneFrg extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
-    public Loader<ArrayList> onCreateLoader(int id, Bundle args) {
+    public Loader<List> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader: ");
         return new MassagesLoader(getActivity().getBaseContext(), args);
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList> loader, ArrayList data) {
+    public void onLoadFinished(Loader<List> loader, List data) {
         adapter.insertMessages(data);
         hideLoading();
         Log.d(TAG, "onLoadFinished: ");
     }
 
     @Override
-    public void onLoaderReset(Loader<ArrayList> loader) {
+    public void onLoaderReset(Loader<List> loader) {
         Log.d(TAG, "onLoaderReset: ");
     }
 
     @Override
     public void onClick(View v) {
 
-        MessageModel model = new MessageModel();
-        model.setAuthor("Author1" + getArguments().getLong(DIALOG_ID));
-        model.setDate(System.currentTimeMillis());
-        model.setDialogId(getArguments().getLong(DIALOG_ID));
-        model.setText(messageSendingView.getText());
-        model.setMsgId(123);
+        MessageDao messageDao = new MessageDao();
+        messageDao.setText(messageSendingView.getText());
+        messageDao.setDialogId(getArguments().getLong(DIALOG_ID));
+        messageDao.setAuthorId(CurrentUser.getId());
+        messageDao.setTime(System.currentTimeMillis());
 
-        presenter.sendMessage(model);
-        adapter.addNewMessage(model);
+        messageSendingView.setText("");
+
+        presenter.sendMessage(messageDao);
+        adapter.addNewMessage(messageDao);
+
     }
 
     @Override

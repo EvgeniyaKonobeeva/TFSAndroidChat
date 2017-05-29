@@ -71,4 +71,6 @@ dependencies {
     compile 'com.pushtorefresh.storio:sqlite-annotations:1.13.0'
 
     annotationProcessor 'com.pushtorefresh.storio:sqlite-annotations-processor:1.13.0'
+
+    compile 'com.facebook.stetho:stetho:1.4.1'
 }

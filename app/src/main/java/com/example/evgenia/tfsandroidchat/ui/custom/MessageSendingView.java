@@ -157,4 +157,8 @@ public class MessageSendingView extends RelativeLayout implements TextWatcher{
     public String getText(){
         return editText.getText().toString();
     }
+
+    public void setText(String s){
+        editText.setText(s);
+    }
 }

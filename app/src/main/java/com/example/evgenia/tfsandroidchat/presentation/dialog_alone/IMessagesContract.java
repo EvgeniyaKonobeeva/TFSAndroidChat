@@ -1,5 +1,6 @@
 package com.example.evgenia.tfsandroidchat.presentation.dialog_alone;
 
+import com.example.evgenia.tfsandroidchat.data.storio.dao.MessageDao;
 import com.example.evgenia.tfsandroidchat.presentation.base_contract.IMainContract;
 import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.MessageModel;
 
@@ -10,7 +11,7 @@ import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.Messa
 public interface IMessagesContract {
 
     interface IMessagesPresenter extends IMainContract.IMainPresenter{
-        void sendMessage(MessageModel msg);
+        void sendMessage(MessageDao msg);
     }
 
     interface IMessagesView {

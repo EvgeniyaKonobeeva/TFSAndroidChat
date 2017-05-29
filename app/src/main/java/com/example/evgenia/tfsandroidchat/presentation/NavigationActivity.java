@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.evgenia.tfsandroidchat.CurrentUser;
 import com.example.evgenia.tfsandroidchat.R;
 import com.example.evgenia.tfsandroidchat.presentation.aboutApp.AboutAppFrg;
 import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.DialogsFrg;
@@ -29,6 +30,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     private static final String TAG = "NavigationActivity";
     private static final int MENU_DIALOGS = 0;
     private static final String TOGGLE_STATE = "toggle_state";
+
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
@@ -53,6 +55,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
         String userLogin = getIntent().getExtras().getString(LoginActivity.KEY_LOGIN);
         ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_user_login)).setText(userLogin);
+        CurrentUser.setLogin(userLogin);
+        CurrentUser.setId(100L);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

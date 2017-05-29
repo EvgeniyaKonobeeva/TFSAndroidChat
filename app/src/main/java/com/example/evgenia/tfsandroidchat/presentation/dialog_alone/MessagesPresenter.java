@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.evgenia.tfsandroidchat.data.Data;
+import com.example.evgenia.tfsandroidchat.data.storio.dao.MessageDao;
 import com.example.evgenia.tfsandroidchat.presentation.base_contract.IMainContract;
 import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.MessageModel;
 import com.example.evgenia.tfsandroidchat.presentation.login.ILoginContract;
@@ -23,7 +24,7 @@ public class MessagesPresenter implements IMessagesContract.IMessagesPresenter{
     private static final String TAG = "MessagesPresenter";
 
     private WeakReference<IMessagesContract.IMessagesView> viewRef;
-    private PublishSubject<MessageModel> sendMsgSubject;
+    private PublishSubject<MessageDao> sendMsgSubject;
 
     public MessagesPresenter() {
 
@@ -59,7 +60,7 @@ public class MessagesPresenter implements IMessagesContract.IMessagesPresenter{
     }
 
     @Override
-    public void sendMessage(MessageModel msg) {
+    public void sendMessage(MessageDao msg) {
 
         sendMsgSubject.onNext(msg);
     }

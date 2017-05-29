@@ -12,6 +12,7 @@ import com.example.evgenia.tfsandroidchat.presentation.dialog_alone.DialogAloneF
 import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.MessageModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -22,7 +23,7 @@ import rx.schedulers.Schedulers;
  * Created by User on 17.05.2017.
  */
 
-public class MassagesLoader extends AsyncTaskLoader<ArrayList> {
+public class MassagesLoader extends AsyncTaskLoader<List> {
     private static final String TAG = "MassagesLoader";
 
     private long dialogId;
@@ -40,58 +41,47 @@ public class MassagesLoader extends AsyncTaskLoader<ArrayList> {
     protected void onStartLoading() {
         super.onStartLoading();
         forceLoad();
-        Log.d(TAG, "onStartLoading: ");
+//        Log.d(TAG, "onStartLoading: ");
     }
 
     @Override
     public void forceLoad() {
         super.forceLoad();
-        Log.d(TAG, "forceLoad: ");
-//        MessageHistoryRx.getMessages(dialogId)
-//
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.newThread())
-//
-//                .doOnError(Throwable::printStackTrace)
-//                .doOnNext(list -> {
-//                    deliverResult(list);
-//                })
-//
-//                .subscribe();
+//        Log.d(TAG, "forceLoad: ");
     }
 
     @Override
-    public ArrayList loadInBackground() {
+    public List loadInBackground() {
         return Data.getMessages().getMessages(dialogId);
     }
 
     @Override
     protected void onStopLoading() {
         super.onStopLoading();
-        Log.d(TAG, "onStopLoading: ");
+//        Log.d(TAG, "onStopLoading: ");
     }
 
     @Override
-    public void deliverResult(ArrayList data) {
-        Log.d(TAG, "deliverResult: ");
+    public void deliverResult(List data) {
+//        Log.d(TAG, "deliverResult: ");
         super.deliverResult(data);
     }
 
     @Override
     protected boolean onCancelLoad() {
-        Log.d(TAG, "onCancelLoad: ");
+//        Log.d(TAG, "onCancelLoad: ");
         return super.onCancelLoad();
     }
 
     @Override
     protected void onAbandon() {
-        Log.d(TAG, "onAbandon: ");
+//        Log.d(TAG, "onAbandon: ");
         super.onAbandon();
     }
 
     @Override
     protected void onReset() {
-        Log.d(TAG, "onReset: ");
+//        Log.d(TAG, "onReset: ");
         super.onReset();
     }
 }

@@ -2,9 +2,15 @@ package com.example.evgenia.tfsandroidchat.data;
 
 import android.util.Log;
 
+import com.example.evgenia.tfsandroidchat.MyApp;
+import com.example.evgenia.tfsandroidchat.data.storio.dao.MessageDao;
+import com.example.evgenia.tfsandroidchat.data.storio.tables.MessageTable;
 import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.MessageModel;
+import com.pushtorefresh.storio.sqlite.StorIOSQLite;
+import com.pushtorefresh.storio.sqlite.queries.Query;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by User on 18.05.2017.
@@ -12,15 +18,29 @@ import java.util.ArrayList;
 
 public class Storage implements IStorage {
     private static final String TAG = "Storage";
+    private StorIOSQLite storIOSQLite = MyApp.provideStorIOSQLite();
+
     @Override
-    public ArrayList<MessageModel> getMessages(long dialogId) {
+    public List<MessageDao> getMessages(long dialogId) {
         Log.d(TAG, "getMessages: thred name = " + Thread.currentThread().getName());
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return generateMessages(dialogId);
+
+        List<MessageDao> resultList = MyApp.provideStorIOSQLite().get()
+                                            .listOfObjects(MessageDao.class)
+                                            .withQuery(Query.builder()
+                                                            .table(MessageTable.D_NAME)
+                                                            .where(MessageTable.COL_DIALOG_ID + " = ? ")
+                                                            .whereArgs(dialogId)
+                                                            .orderBy(MessageTable.COL_TIME + " desc ")
+                                                            .build())
+                                            .prepare()
+                                            .executeAsBlocking();
+
+        return resultList;
     }
 
     private ArrayList<MessageModel> generateMessages(long did){
@@ -34,8 +54,12 @@ public class Storage implements IStorage {
     }
 
     @Override
-    public String putMessageToDB(MessageModel model) {
+    public String putMessageToDB(MessageDao model) {
         Log.d(TAG, "putMessageToDB: thread = " + Thread.currentThread().getName());
+        MyApp.provideStorIOSQLite().put()
+                .object(model)
+                .prepare()
+                .executeAsBlocking();
         return "result OK";
     }
 }

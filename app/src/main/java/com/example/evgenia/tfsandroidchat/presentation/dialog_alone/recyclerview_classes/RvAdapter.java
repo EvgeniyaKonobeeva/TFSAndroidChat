@@ -6,19 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.evgenia.tfsandroidchat.CurrentUser;
 import com.example.evgenia.tfsandroidchat.R;
+import com.example.evgenia.tfsandroidchat.data.storio.dao.MessageDao;
 import com.example.evgenia.tfsandroidchat.presentation.dialogs_list.models.MessageModel;
 import com.example.evgenia.tfsandroidchat.presentation.login.user.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by User on 18.05.2017.
  */
 
 public class RvAdapter extends RecyclerView.Adapter {
-    ArrayList<MessageModel> list;
+    List<MessageDao> list;
     private static final int LEFT = 235;
     private static final int RIGHT = 140;
 
@@ -49,25 +52,25 @@ public class RvAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if(position%2 == 0) {
-            return LEFT;
-        }else {
+        if(list.get(position).authorId() == CurrentUser.getId()){
             return RIGHT;
+        }else {
+            return LEFT;
         }
 
     }
 
-    public void addNewMessage(MessageModel msg){
+    public void addNewMessage(MessageDao msg){
         list.add(0, msg);
         notifyItemInserted(0);
     }
 
-    public void insertMessages(ArrayList<MessageModel> list){
+    public void insertMessages(List<MessageDao> list){
         this.list.addAll(0, list);
         notifyItemRangeInserted(0, list.size());
     }
 
-    public ArrayList<MessageModel> getList() {
+    public List<MessageDao> getList() {
         return list;
     }
 
@@ -82,9 +85,9 @@ public class RvAdapter extends RecyclerView.Adapter {
             time = (TextView)itemView.findViewById(R.id.tv_date);
         }
 
-        public void onBindModel(MessageModel model){
-            text.setText(model.getText());
-            time.setText(sdf.format(model.getDate()));
+        public void onBindModel(MessageDao model){
+            text.setText(model.text());
+            time.setText(sdf.format(model.time()));
         }
     }
 
